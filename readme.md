@@ -1,5 +1,5 @@
 
-#Workspace Python
+# Workspace Python
 
     WS de Python criado para se aprofundar em conceitos, nuances e diferenças da linguagens quando comparadas à outras de mais baixo nível.
 
