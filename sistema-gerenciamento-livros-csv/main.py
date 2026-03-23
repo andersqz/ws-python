@@ -1,6 +1,7 @@
 from livro_dao import guardar_livro
 from livro_dao import listar_livro
 from livro_dao import alugar_livro
+from livro_dao import remover_livro
 
 while True:
 
@@ -23,6 +24,8 @@ while True:
         livro = listar_livro()
     elif opcao == 3:
         livro = alugar_livro()
+    elif opcao == 4:
+        livro = remover_livro()
     elif opcao == 5:
         print("Obrigado por usar o sistema! Até mais.")
         break
