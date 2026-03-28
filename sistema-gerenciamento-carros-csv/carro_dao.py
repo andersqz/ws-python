@@ -14,7 +14,7 @@ def proximo_id():
          return 1
 
 def guardar_carro():
-        print("===== ALUGUEL DE CARRO =====")
+        print("===== GARAGEM DE CARROS =====")
         
         marca = input("Marca: ")
         modelo = input("Modelo: ")
@@ -39,8 +39,15 @@ def listar_carro():
                 reader = csv.reader(arquivo, delimiter=";")
                 for linha in reader:
                     id, marca, modelo, cor, ano, alugado = linha # isso aqui 'desempacota' os campos/atributos
-                    print(f"[{id}]| Marca: {marca}| Modelo: {modelo}| Cor: {cor}| Ano: {ano}| Status: {"Alugado" if alugado == "True" else "Disponível"}")
-                    print("-" * 80)
+                    print(f"""
+                    ID: {id} 
+                    Marca: {marca}
+                    Modelo: {modelo}
+                    Cor: {cor}
+                    Ano: {ano}
+                    Status: {"Alugado" if alugado == "True" else "Disponível"}
+                    """)
+                    print("-" * 40)
     except FileNotFoundError:
           print("Nenhum carro cadastrado.")
             
@@ -48,11 +55,18 @@ def listar_carro():
 def alugar_carro():
     print("===== ALUGUEL DE CARRO =====")
     with open("carros.csv", "r", encoding="utf-8") as arquivo:
-         reader = csv.reader(arquivo, delimiter=";")
-         for linha in reader:
-              id, marca, modelo, cor, ano, alugado = linha
-              print(f"[{id}]| Marca: {marca}| Modelo: {modelo}| Cor: {cor}| Ano: {ano}| Status: {"Alugado" if alugado == "True" else "Disponível"}")
-              print("-" * 80)
+        reader = csv.reader(arquivo, delimiter=";")
+        for linha in reader:
+            id, marca, modelo, cor, ano, alugado = linha
+            print(f"""
+            ID: {id} 
+            Marca: {marca}
+            Modelo: {modelo}
+            Cor: {cor}
+            Ano: {ano}
+            Status: {"Alugado" if alugado == "True" else "Disponível"}
+            """)
+            print("-" * 40)
     id_buscado = int(input("Digite o ID do carro: "))
 
     with open("carros.csv", "r", encoding="utf-8") as arquivo:
@@ -68,7 +82,7 @@ def alugar_carro():
               else:
                   linha[5] = "True"
                   with open("carros_alugados.csv", "a", newline="", encoding="utf-8") as arquivo:
-                       writer = csv.writer(arquivo, delimiter="")
+                       writer = csv.writer(arquivo, delimiter=";")
                        writer.writerow(linha)
                   print("Carro alugado com sucesso!")
               break
@@ -83,11 +97,18 @@ def alugar_carro():
 def remover_carro():
     print("===== ALUGUEL DE CARRO =====")
     with open("carros.csv", "r", encoding="utf-8") as arquivo:
-         reader = csv.reader(arquivo, delimiter=";")
-         for linha in reader:
-              id, marca, modelo, cor, ano, alugado = linha
-              print(f"[{id}]| Marca: {marca}| Modelo: {modelo}| Cor: {cor}| Ano: {ano}| Status: {"Alugado" if alugado == "True" else "Disponível"}")
-              print("-" * 80)
+        reader = csv.reader(arquivo, delimiter=";")
+        for linha in reader:
+            id, marca, modelo, cor, ano, alugado = linha
+            print(f"""
+            ID: {id} 
+            Marca: {marca}
+            Modelo: {modelo}
+            Cor: {cor}
+            Ano: {ano}
+            Status: {"Alugado" if alugado == "True" else "Disponível"}
+            """)
+            print("-" * 40)
     id_buscado = int(input("Digite o ID do carro: "))
 
     with open("carros.csv", "r", encoding="utf-8") as arquivo:
@@ -99,17 +120,17 @@ def remover_carro():
         if int(linha[0]) == id_buscado:
             encontrado = True
             with open("carros_removidos.csv", "a", newline="", encoding="utf-8") as arquivo:
-                writer = csv.writer(arquivo, delimtier=";")
+                writer = csv.writer(arquivo, delimiter=";")
                 writer.writerow(linha)
             print(f"Carro [{linha[1]}] removido com sucesso!")
             break
-        if not encontrado:
-             print("Carro não encontrado na garagem!")
-             return
-        
-        linhas = [linha for linha in linhas if int(linha[0]) != id_buscado]
 
-        with open("carros.csv", "w", newline="", encoding="utf-8") as arquivo:
-             writer.csv.writer(arquivo, delimtier=";")
-             writer.writerows(linhas)
+    if not encontrado:
+            print("Carro não encontrado na garagem!")
+            return
+        
+    linhas = [linha for linha in linhas if int(linha[0]) != id_buscado]
+    with open("carros.csv", "w", newline="", encoding="utf-8") as arquivo:
+        writer = csv.writer(arquivo, delimiter=";")
+        writer.writerows(linhas)
             
