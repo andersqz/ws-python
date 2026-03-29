@@ -1,6 +1,5 @@
 from models.Produto import Produto
-from repository.cadastrar_produto import cadastrar_produto
-from repository.listar_produtos import listar_produtos
+from repository.produto_repository import cadastrar_produto, listar_produtos
 nome_arquivo = "produtos.csv"
 
 while True:

@@ -16,11 +16,22 @@ def proximo_id(nome_arquivo):
 
 
 def cadastrar_produto(nome_arquivo, nome, preco):
-    obj_produto = Produto(int(novo_id), nome, float(preco))
     novo_id = proximo_id(nome_arquivo)
+    obj_produto = Produto(int(novo_id), nome, float(preco))
 
     with open(nome_arquivo, "a", newline="", encoding="utf-8") as arquivo:
         writer = csv.writer(arquivo, delimiter=";")
         writer.writerow([novo_id, obj_produto.nome, obj_produto.preco])
         
     return obj_produto
+
+def listar_produtos(nome_arquivo):
+    produtos = []
+
+    with open(nome_arquivo, "r", encoding="utf-8") as arquivo:
+        reader = csv.reader(arquivo, delimiter=";")
+        for linha in reader:
+            id, nome, preco = linha # desempacotamento dos dados
+            obj_produto = Produto(int(id), nome, float(preco))
+            produtos.append(obj_produto)
+    return produtos
